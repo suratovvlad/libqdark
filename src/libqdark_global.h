@@ -1,0 +1,12 @@
+#ifndef LIBQDARK_GLOBAL_H
+#define LIBQDARK_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(LIBQDARK_LIBRARY)
+#  define LIBQDARKSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define LIBQDARKSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // LIBQDARK_GLOBAL_H
