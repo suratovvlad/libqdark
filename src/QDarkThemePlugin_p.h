@@ -7,6 +7,7 @@ class QMainWindow;
 class QMenu;
 class QAction;
 class QDarkThemePlugin;
+class SettingsManager;
 
 class QDarkThemePluginPrivate
 {
@@ -21,16 +22,14 @@ public:
     void initialize() const;
 
     void _q_ToggleTheme();
-
 private:
     QSharedPointer<QMenu> m_darkThemeMenu;
     QSharedPointer<QAction> m_enableDarkThemeAction;
     QSharedPointer<QAction> m_aboutAction;
     QString m_darkThemeStyleSheet;
-    QString m_defaultStyleSheet;
-    bool m_isFirst;
-    bool m_isDark;
+
     mutable QMainWindow* m_mainWindow;
+    QSharedPointer<SettingsManager> m_settingsManager;
 };
 
 #endif // QDARKTHEMEPLUGIN_P_H
