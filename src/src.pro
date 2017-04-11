@@ -35,7 +35,7 @@ RESOURCES += QDarkStyleSheet/qdarkstyle/style.qrc
 unix:!macx {
     isEmpty( PREFIX ):PREFIX = /usr
     DEFINES += PREFIX=\\\"$${PREFIX}\\\"
-    target.path = $${PREFIX}/lib/libqdark
+    target.path = $${PREFIX}/lib
     includes.path = $${PREFIX}/include/libqdark
     includes.files = libqdark_global.h \
                      QDarkThemePlugin.h
