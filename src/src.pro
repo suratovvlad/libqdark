@@ -1,4 +1,5 @@
 include(../defaults.pri)
+include(version.pri)
 
 QT       += widgets gui
 
@@ -30,3 +31,17 @@ HEADERS += \
     SettingsManager.h
 
 RESOURCES += QDarkStyleSheet/qdarkstyle/style.qrc
+
+unix:!macx {
+    isEmpty( PREFIX ):PREFIX = /usr
+    DEFINES += PREFIX=\\\"$${PREFIX}\\\"
+    target.path = $${PREFIX}/lib/libqdark
+    includes.path = $${PREFIX}/include/libqdark
+    includes.files = libqdark_global.h \
+                     QDarkThemePlugin.h
+    INSTALLS += target \
+                includes
+}
+
+DISTFILES += \
+    version.pri
