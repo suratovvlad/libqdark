@@ -10,8 +10,8 @@ QDarkThemePlugin::~QDarkThemePlugin()
 {
 }
 
-void QDarkThemePlugin::initialize() const
+void QDarkThemePlugin::initialize()
 {
-    Q_D(const QDarkThemePlugin);
+	Q_D(QDarkThemePlugin);
     d->initialize();
 }

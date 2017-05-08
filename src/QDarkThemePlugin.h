@@ -14,7 +14,7 @@ public:
     QDarkThemePlugin();
     virtual ~QDarkThemePlugin();
 
-    void initialize() const;
+	void initialize();
 
 private:
     QScopedPointer<QDarkThemePluginPrivate> const d_ptr;

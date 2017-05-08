@@ -22,13 +22,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     QDarkThemePlugin.cpp \
     QDarkThemePlugin_p.cpp \
-    SettingsManager.cpp
+    SettingsManager.cpp \
+    AboutDialog.cpp
 
 HEADERS += \
     libqdark_global.h \
     QDarkThemePlugin.h \
     QDarkThemePlugin_p.h \
-    SettingsManager.h
+    SettingsManager.h \
+    AboutDialog.h
 
 RESOURCES += QDarkStyleSheet/qdarkstyle/style.qrc
 
@@ -45,3 +47,6 @@ unix:!macx {
 
 DISTFILES += \
     version.pri
+
+FORMS += \
+    AboutDialog.ui
