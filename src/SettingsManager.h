@@ -1,5 +1,5 @@
-#ifndef SETTINGSMANAGER_H
-#define SETTINGSMANAGER_H
+#ifndef QDARKTHEMEPLUGIN_SETTINGSMANAGER_H
+#define QDARKTHEMEPLUGIN_SETTINGSMANAGER_H
 
 #include <QObject>
 #include <QSharedPointer>
@@ -24,4 +24,4 @@ private:
     QSharedPointer<QSettings> m_settings;
 };
 
-#endif // SETTINGSMANAGER_H
+#endif // QDARKTHEMEPLUGIN_SETTINGSMANAGER_H

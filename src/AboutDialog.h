@@ -1,5 +1,5 @@
-#ifndef ABOUTDIALOG_H
-#define ABOUTDIALOG_H
+#ifndef QDARKTHEMEPLUGIN_ABOUTDIALOG_H
+#define QDARKTHEMEPLUGIN_ABOUTDIALOG_H
 
 #include <QDialog>
 
@@ -19,4 +19,4 @@ private:
 	Ui::AboutDialog *ui;
 };
 
-#endif // ABOUTDIALOG_H
+#endif // QDARKTHEMEPLUGIN_ABOUTDIALOG_H
