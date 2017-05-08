@@ -1,9 +1,9 @@
-#include "AboutDialog.h"
-#include "ui_AboutDialog.h"
+#include "AboutDarkThemePluginDialog.h"
+#include "ui_AboutDarkThemePluginDialog.h"
 
-AboutDialog::AboutDialog(QWidget *parent) :
+AboutDarkThemePluginDialog::AboutDarkThemePluginDialog(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::AboutDialog)
+	ui(new Ui::AboutDarkThemePluginDialog)
 {
 	ui->setupUi(this);
 
@@ -15,7 +15,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 	ui->nameLabel->setFont(nameLabelFont);
 }
 
-AboutDialog::~AboutDialog()
+AboutDarkThemePluginDialog::~AboutDarkThemePluginDialog()
 {
 	delete ui;
 }

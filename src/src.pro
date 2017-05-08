@@ -23,14 +23,14 @@ SOURCES += \
     QDarkThemePlugin.cpp \
     QDarkThemePlugin_p.cpp \
     SettingsManager.cpp \
-    AboutDialog.cpp
+    AboutDarkThemePluginDialog.cpp
 
 HEADERS += \
     libqdark_global.h \
     QDarkThemePlugin.h \
     QDarkThemePlugin_p.h \
     SettingsManager.h \
-    AboutDialog.h
+    AboutDarkThemePluginDialog.h
 
 RESOURCES += QDarkStyleSheet/qdarkstyle/style.qrc
 
@@ -49,4 +49,4 @@ DISTFILES += \
     version.pri
 
 FORMS += \
-    AboutDialog.ui
+    AboutDarkThemePluginDialog.ui

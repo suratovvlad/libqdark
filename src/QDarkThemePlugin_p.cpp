@@ -12,7 +12,7 @@
 
 #include "QDarkThemePlugin.h"
 #include "SettingsManager.h"
-#include "AboutDialog.h"
+#include "AboutDarkThemePluginDialog.h"
 
 QDarkThemePluginPrivate::QDarkThemePluginPrivate(QDarkThemePlugin* lib)
     : q_ptr(lib)
@@ -62,7 +62,7 @@ void QDarkThemePluginPrivate::initialize()
 	// Add this action to menu
 	m_darkThemeMenu->addAction(m_aboutAction.data());
 	// Create about dialog as child of QMainWindow
-	m_aboutDialog = QSharedPointer<AboutDialog>(new AboutDialog(m_mainWindow));
+	m_aboutDialog = QSharedPointer<AboutDarkThemePluginDialog>(new AboutDarkThemePluginDialog(m_mainWindow));
 	m_aboutDialog->setUpdatesEnabled(true);
 	// Connect about action with the about dialog
 	QObject::connect(m_aboutAction.data(), &QAction::triggered, m_aboutDialog.data(), &QDialog::show);

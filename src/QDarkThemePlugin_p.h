@@ -8,7 +8,7 @@ class QMenu;
 class QAction;
 class QDarkThemePlugin;
 class SettingsManager;
-class AboutDialog;
+class AboutDarkThemePluginDialog;
 
 class QDarkThemePluginPrivate
 {
@@ -31,7 +31,7 @@ private:
 
 	QMainWindow* m_mainWindow;
     QSharedPointer<SettingsManager> m_settingsManager;
-	QSharedPointer<AboutDialog> m_aboutDialog;
+	QSharedPointer<AboutDarkThemePluginDialog> m_aboutDialog;
 };
 
 #endif // QDARKTHEMEPLUGIN_P_H

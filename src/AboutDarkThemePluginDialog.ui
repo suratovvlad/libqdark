@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AboutDialog</class>
- <widget class="QDialog" name="AboutDialog">
+ <class>AboutDarkThemePluginDialog</class>
+ <widget class="QDialog" name="AboutDarkThemePluginDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -100,7 +100,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>AboutDialog</receiver>
+   <receiver>AboutDarkThemePluginDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -116,7 +116,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>AboutDialog</receiver>
+   <receiver>AboutDarkThemePluginDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
