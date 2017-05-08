@@ -7,15 +7,16 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+	QApplication app(argc, argv);
+	app.setApplicationName("libqdarkExampleApp");
 
-    app.setApplicationName("libqdarkExampleApp");
+	QSharedPointer<QDarkThemePlugin> darker = QSharedPointer<QDarkThemePlugin>(new QDarkThemePlugin());
+	darker->changeLinksColor();
 
-    MainWindow mainWindow;
-    mainWindow.show();
+	MainWindow mainWindow;
+	mainWindow.show();
 
-    QDarkThemePlugin darker;
-    darker.initialize();
+	darker->initialize();
 
     return app.exec();
 }

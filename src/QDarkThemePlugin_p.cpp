@@ -8,6 +8,7 @@
 #include <QAction>
 #include <QMenuBar>
 #include <QPalette>
+#include <QMessageBox>
 
 #include "QDarkThemePlugin.h"
 #include "SettingsManager.h"
@@ -23,14 +24,16 @@ QDarkThemePluginPrivate::QDarkThemePluginPrivate(QDarkThemePlugin* lib)
 		m_darkThemeStyleSheet = file.readAll();
 		file.close();
 	}
-
-    // TODO: Add if it needs
-    //	QPalette palette = app.palette();
-    //	palette.setColor(QPalette::Active, QPalette::Base, QColor(100,100,100));
-    //	palette.setColor(QPalette::Link, QColor("#00bfff"));
-    //	app.setPalette(palette);
 }
 
+void QDarkThemePluginPrivate::changeLinksColor()
+{
+	QPalette palette = qApp->palette();
+	palette.setColor(QPalette::Link, QColor("#00bfff"));
+	qApp->setPalette(palette);
+}
+
+#include <QDebug>
 void QDarkThemePluginPrivate::initialize()
 {
 	// Find QMainWindow widget
@@ -43,7 +46,7 @@ void QDarkThemePluginPrivate::initialize()
         }
 
         qApp->processEvents();
-    }
+	}
 
 	// Initialize additional menu with actions as child of QMainWindow
 	m_darkThemeMenu = QSharedPointer<QMenu>(new QMenu(QObject::tr("Dark Theme Plugin"), m_mainWindow));
@@ -60,6 +63,7 @@ void QDarkThemePluginPrivate::initialize()
 	m_darkThemeMenu->addAction(m_aboutAction.data());
 	// Create about dialog as child of QMainWindow
 	m_aboutDialog = QSharedPointer<AboutDialog>(new AboutDialog(m_mainWindow));
+	m_aboutDialog->setUpdatesEnabled(true);
 	// Connect about action with the about dialog
 	QObject::connect(m_aboutAction.data(), &QAction::triggered, m_aboutDialog.data(), &QDialog::show);
 	// Add new menu to QMenuBar of the application
@@ -74,22 +78,32 @@ void QDarkThemePluginPrivate::initialize()
     } else {
         bool isDark = m_settingsManager->getBoolValue(SettingsManager::SETTING_DARK_THEME_ENABLED);
         if (isDark) {
+			// Block signals to avoid second toggling
             m_enableDarkThemeAction->blockSignals(true);
+			// Toggle the action state
             m_enableDarkThemeAction->toggle();
-            m_mainWindow->setStyleSheet(m_darkThemeStyleSheet);
-            m_enableDarkThemeAction->blockSignals(false);
+			// Change theme to dark
+			m_mainWindow->setStyleSheet(m_darkThemeStyleSheet);
+			// Unblock signals
+			m_enableDarkThemeAction->blockSignals(false);
         }
     }
+
 }
 
 void QDarkThemePluginPrivate::_q_ToggleTheme()
 {
+	// Check current theme in settings manager
     bool isDark = m_settingsManager->getBoolValue(SettingsManager::SETTING_DARK_THEME_ENABLED);
     if (!isDark) {
+		// Change theme to dark
         m_mainWindow->setStyleSheet(m_darkThemeStyleSheet);
+		// Update settings value
 		m_settingsManager->updateValue(SettingsManager::SETTING_DARK_THEME_ENABLED, true);
-    } else {
+	} else {
+		// Change theme to default style
         m_mainWindow->setStyleSheet(m_settingsManager->getStringValue(SettingsManager::SETTING_DEFAULT_STYLE));
+		// Update settings value
 		m_settingsManager->updateValue(SettingsManager::SETTING_DARK_THEME_ENABLED, false);
 	}
 }

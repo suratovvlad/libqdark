@@ -15,11 +15,12 @@ class QDarkThemePluginPrivate
     Q_DISABLE_COPY(QDarkThemePluginPrivate)
     Q_DECLARE_PUBLIC(QDarkThemePlugin)
     QDarkThemePlugin* const q_ptr;
-    Q_PRIVATE_SLOT(d_func(), void _q_ToggleTheme())
-
+	Q_PRIVATE_SLOT(d_func(), void _q_ToggleTheme())
+	Q_PRIVATE_SLOT(d_func(), void _q_paletteChanged(QPalette))
 public:
     QDarkThemePluginPrivate(QDarkThemePlugin* lib);
 
+	void changeLinksColor();
 	void initialize();
 	void _q_ToggleTheme();
 private:

@@ -42,6 +42,9 @@
      <property name="text">
       <string notr="true">&lt;a href=&quot;http://www.keepassx.org/&quot;&gt;https://github.com/suratovvlad/libqdark/&lt;/a&gt;</string>
      </property>
+     <property name="textFormat">
+      <enum>Qt::AutoText</enum>
+     </property>
      <property name="openExternalLinks">
       <bool>true</bool>
      </property>
