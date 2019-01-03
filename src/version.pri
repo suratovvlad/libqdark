@@ -3,17 +3,17 @@ VER_MAJ= 0
 VER_MIN = 1
 VER_PAT= 0
 
-# NEXT PART TAKEN FROM https://gist.github.com/grassator/11405930
+# NEXT PART TAKEN FROM
 
 # If there is no version tag in git this one will be used
 #VERSION = 0.1.0
 
-## Need to discard STDERR so get path to NULL device
-#win32 {
-#    NULL_DEVICE = NUL # Windows doesn't have /dev/null but has NUL
-#} else {
-#    NULL_DEVICE = /dev/null
-#}
+# Need to discard STDERR so get path to NULL device
+win32 {
+    NULL_DEVICE = NUL # Windows doesn't have /dev/null but has NUL
+} else {
+    NULL_DEVICE = /dev/null
+}
 
 # Need to call git with manually specified paths to repository
 BASE_GIT_COMMAND = git --git-dir $$PWD/../.git --work-tree $$PWD/../
@@ -39,22 +39,22 @@ GIT_VERSION = $$system($$BASE_GIT_COMMAND describe --always --tags 2> $$NULL_DEV
 #GIT_VERSION ~= s/-/"."
 #GIT_VERSION ~= s/g/""
 
-## Now we are ready to pass parsed version to Qt
+# Now we are ready to pass parsed version to Qt
 #VERSION = $$GIT_VERSION
-#win32 { # On windows version can only be numerical so remove commit hash
-#    VERSION ~= s/\.\d+\.[a-f0-9]{6,}//
-#}
+win32 { # On windows version can only be numerical so remove commit hash
+    VERSION ~= s/\.\d+\.[a-f0-9]{6,}//
+}
 
 # Adding C preprocessor #DEFINE so we can use it in C++ code
 # also here we want full version on every system so using GIT_VERSION
 DEFINES += GIT_VERSION=\\\"$$GIT_VERSION\\\"
 
-## By default Qt only uses major and minor version for Info.plist on Mac.
-## This will rewrite Info.plist with full version
-#macx {
-#    INFO_PLIST_PATH = $$shell_quote($${OUT_PWD}/$${TARGET}.app/Contents/Info.plist)
-#    QMAKE_POST_LINK += /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $${VERSION}\" $${INFO_PLIST_PATH}
-#}
+# By default Qt only uses major and minor version for Info.plist on Mac.
+# This will rewrite Info.plist with full version
+macx {
+    INFO_PLIST_PATH = $$shell_quote($${OUT_PWD}/$${TARGET}.app/Contents/Info.plist)
+    QMAKE_POST_LINK += /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $${VERSION}\" $${INFO_PLIST_PATH}
+}
 
 VERSIONS = $$GIT_VERSION
 VERSIONS ~= s/-/"."
@@ -63,6 +63,19 @@ VERSIONS = $$split(VERSIONS, ".")
 VER_MAJ = $$member(VERSIONS, 0)
 VER_MIN = $$member(VERSIONS, 1)
 VER_PAT = $$member(VERSIONS, 2)
+
+#VERSION = $$GIT_VERSION
+#VERSION ~= s/-/"."
+#VERSION ~= s/g/""
+#VERSIONS = $$split(VERSION, ".")
+#VER_MAJ = $$member(VERSIONS, 0)
+#VER_MIN = $$member(VERSIONS, 1)
+#VER_PAT = $$member(VERSIONS, 2)
+
+message($$GIT_VERSION)
+message($$VER_MAJ)
+message($$VER_MIN)
+message($$VER_PAT)
 
 
 PROJECT_VERSION = $${VER_MAJ}.$${VER_MIN}.$${VER_PAT}
