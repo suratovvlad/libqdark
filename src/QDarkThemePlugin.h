@@ -1,55 +1,60 @@
-#ifndef QDARKTHEMEPLUGIN_H
-#define QDARKTHEMEPLUGIN_H
+#pragma once
 
+#include <memory>
 #include "libqdark_global.h"
-#include <QScopedPointer>
 
-class QDarkThemePluginPrivate;
+namespace libqdark {
 
 /**
  * @brief The QDarkThemePlugin class
  * This class implements a plugin for qt applications.
  * This plugin makes the application darker.
  */
-class LIBQDARKSHARED_EXPORT QDarkThemePlugin
+class LIBQDARKSHARED_EXPORT QDarkThemePlugin final
 {
+    class QDarkThemePluginPrivate;
     Q_DECLARE_PRIVATE(QDarkThemePlugin)
 
 public:
-	/**
-	 * @brief QDarkThemePlugin
-	 * The constructor of this class.
-	 */
+    /**
+     * @brief QDarkThemePlugin
+     * The constructor of this class.
+     */
     QDarkThemePlugin();
 
-	/**
-	 * @brief ~QDarkThemePlugin
-	 * The virtual destructor of this class.
-	 */
+    /**
+     * @brief ~QDarkThemePlugin
+     * The virtual destructor of this class.
+     */
     virtual ~QDarkThemePlugin();
 
-	/**
-	 * @brief changeLinksColor
-	 * This method changes (<a>) color for links in the entire application.
-	 * It uses the QPalette, so, it needs to be called BEFORE any "show" methods.
-	 */
-	void changeLinksColor();
+    QDarkThemePlugin(const QDarkThemePlugin&) = delete;
+    QDarkThemePlugin(QDarkThemePlugin&&) = delete;
+    QDarkThemePlugin& operator=(const QDarkThemePlugin&) = delete;
+    QDarkThemePlugin& operator=(QDarkThemePlugin&&) = delete;
 
-	/**
-	 * @brief initialize
-	 * This method initialize base functionality of that plugin: an additional
-	 * menu with the "Dark theme" action and the "About" action.
-	 * It uses the instance of QMainWindow, so, it needs to be called AFTER
-	 * the QMainWindow instantiation.
-	 */
-	void initialize();
+    /**
+     * @brief changeLinksColor
+     * This method changes (<a>) color for links in the entire application.
+     * It uses the QPalette, so, it needs to be called BEFORE any "show" methods.
+     */
+    void changeLinksColor();
+
+    /**
+     * @brief initialize
+     * This method initialize base functionality of that plugin: an additional
+     * menu with the "Dark theme" action and the "About" action.
+     * It uses the instance of QMainWindow, so, it needs to be called AFTER
+     * the QMainWindow instantiation.
+     */
+    void initialize();
 
 private:
-	/**
-	 * @brief d_ptr
-	 * The pointer to the private realization (PIMPL).
-	 */
-    QScopedPointer<QDarkThemePluginPrivate> const d_ptr;
+    /**
+     * @brief d_ptr
+     * The pointer to the private realization (PIMPL).
+     */
+    std::unique_ptr<QDarkThemePluginPrivate> const d_ptr;
 };
 
-#endif // QDARKTHEMEPLUGIN_H
+} // namespace libqdark

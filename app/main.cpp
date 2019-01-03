@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     app->setOrganizationName("QDarkStyle (libqdark)");
     app->setApplicationName("QDarkStyle Example (libqdark)");
 
-    auto darker = std::unique_ptr<QDarkThemePlugin>{ new QDarkThemePlugin{} };
+    auto darker = std::unique_ptr<libqdark::QDarkThemePlugin>{ new libqdark::QDarkThemePlugin{} };
     darker->changeLinksColor();
 
     auto mainWindow = std::unique_ptr<MainWindow>{ new MainWindow{} };

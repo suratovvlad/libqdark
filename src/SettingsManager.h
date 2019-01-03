@@ -1,15 +1,24 @@
-#ifndef QDARKTHEMEPLUGIN_SETTINGSMANAGER_H
-#define QDARKTHEMEPLUGIN_SETTINGSMANAGER_H
+#pragma once
 
+#include <memory>
 #include <QObject>
-#include <QSharedPointer>
 #include <QSettings>
 
-class SettingsManager : public QObject
+namespace libqdark {
+
+class SettingsManager final: public QObject
 {
     Q_OBJECT
+
 public:
-    explicit SettingsManager(QObject* parent = NULL);
+    explicit SettingsManager(QObject* parent = nullptr);
+
+    virtual ~SettingsManager() override;
+
+    SettingsManager(const SettingsManager&) = delete;
+    SettingsManager(SettingsManager&&) = delete;
+    SettingsManager& operator=(const SettingsManager&) = delete;
+    SettingsManager& operator=(SettingsManager&&) = delete;
 
     QString getStringValue(const QString& key) const;
     bool getBoolValue(const QString& key) const;
@@ -21,7 +30,8 @@ public:
 
 private:
     bool fileExists(const QString& path);
-    QSharedPointer<QSettings> m_settings;
+
+    std::unique_ptr<QSettings> m_settings;
 };
 
-#endif // QDARKTHEMEPLUGIN_SETTINGSMANAGER_H
+} // namespace libqdark

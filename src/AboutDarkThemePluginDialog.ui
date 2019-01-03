@@ -40,7 +40,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string notr="true">&lt;a href=&quot;http://www.keepassx.org/&quot;&gt;https://github.com/suratovvlad/libqdark/&lt;/a&gt;</string>
+      <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/ColinDuquesnoy/QDarkStyleSheet&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/ColinDuquesnoy/QDarkStyleSheet&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/ColinDuquesnoy/QDarkStyleSheet&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/suratovvlad/QDarkStyleSheet/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;http://www.keepassx.org/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/suratovvlad/libqdark/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::AutoText</enum>
@@ -59,7 +59,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Libqdark is a simple plugin for Qt applications that makes them darker. It is distributed under the term of the MIT License.</string>
+      <string>Libqdark is a simple plugin for Qt applications that makes them darker. It is based on QDarkStyleSheetIt by ColinDuquesnoy. The library is distributed under the term of the MIT License.</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

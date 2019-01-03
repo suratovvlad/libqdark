@@ -1,22 +1,30 @@
-#ifndef QDARKTHEMEPLUGIN_ABOUTDIALOG_H
-#define QDARKTHEMEPLUGIN_ABOUTDIALOG_H
+#pragma once
 
+#include <memory>
 #include <QDialog>
 
 namespace Ui {
 class AboutDarkThemePluginDialog;
 }
 
-class AboutDarkThemePluginDialog : public QDialog
+namespace libqdark {
+
+class AboutDarkThemePluginDialog final : public QDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	explicit AboutDarkThemePluginDialog(QWidget *parent = 0);
-	~AboutDarkThemePluginDialog();
+
+    explicit AboutDarkThemePluginDialog(QWidget* parent = nullptr);
+    virtual ~AboutDarkThemePluginDialog() override;
+
+    AboutDarkThemePluginDialog(const AboutDarkThemePluginDialog&) = delete;
+    AboutDarkThemePluginDialog(AboutDarkThemePluginDialog&&) = delete;
+    AboutDarkThemePluginDialog& operator=(const AboutDarkThemePluginDialog&) = delete;
+    AboutDarkThemePluginDialog& operator=(AboutDarkThemePluginDialog&&) = delete;
 
 private:
-	Ui::AboutDarkThemePluginDialog *ui;
+    std::unique_ptr<Ui::AboutDarkThemePluginDialog> ui;
 };
 
-#endif // QDARKTHEMEPLUGIN_ABOUTDIALOG_H
+} // namespace libqdark
