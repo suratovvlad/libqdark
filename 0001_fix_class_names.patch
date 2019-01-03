@@ -1,0 +1,112 @@
+diff --git a/example/ui/dw_buttons.ui b/example/ui/dw_buttons.ui
+index fd89e96..22e7700 100644
+--- a/example/ui/dw_buttons.ui
++++ b/example/ui/dw_buttons.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWButtons</class>
++ <widget class="QDockWidget" name="DWButtons">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+diff --git a/example/ui/dw_containers_no_tabs.ui b/example/ui/dw_containers_no_tabs.ui
+index 842b86a..08796db 100644
+--- a/example/ui/dw_containers_no_tabs.ui
++++ b/example/ui/dw_containers_no_tabs.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWContainersNoTabs</class>
++ <widget class="QDockWidget" name="DWContainersNoTabs">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+diff --git a/example/ui/dw_containers_tabs.ui b/example/ui/dw_containers_tabs.ui
+index 17021b1..1aa0297 100644
+--- a/example/ui/dw_containers_tabs.ui
++++ b/example/ui/dw_containers_tabs.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWContainersTabs</class>
++ <widget class="QDockWidget" name="DWContainersTabs">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+diff --git a/example/ui/dw_displays.ui b/example/ui/dw_displays.ui
+index 146405f..2e10b14 100644
+--- a/example/ui/dw_displays.ui
++++ b/example/ui/dw_displays.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWDisplays</class>
++ <widget class="QDockWidget" name="DWDisplays">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+diff --git a/example/ui/dw_inputs_fields.ui b/example/ui/dw_inputs_fields.ui
+index ed02a72..17e87ab 100644
+--- a/example/ui/dw_inputs_fields.ui
++++ b/example/ui/dw_inputs_fields.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWInputFields</class>
++ <widget class="QDockWidget" name="DWInputFields">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+diff --git a/example/ui/dw_inputs_no_fields.ui b/example/ui/dw_inputs_no_fields.ui
+index ebfc189..34ce751 100644
+--- a/example/ui/dw_inputs_no_fields.ui
++++ b/example/ui/dw_inputs_no_fields.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWInputNoFields</class>
++ <widget class="QDockWidget" name="DWInputNoFields">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+diff --git a/example/ui/dw_views.ui b/example/ui/dw_views.ui
+index 3115a2c..7982a46 100644
+--- a/example/ui/dw_views.ui
++++ b/example/ui/dw_views.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWViews</class>
++ <widget class="QDockWidget" name="DWViews">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+diff --git a/example/ui/dw_widgets.ui b/example/ui/dw_widgets.ui
+index 23bff1f..7fbf775 100644
+--- a/example/ui/dw_widgets.ui
++++ b/example/ui/dw_widgets.ui
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <ui version="4.0">
+- <class>DockWidget</class>
+- <widget class="QDockWidget" name="DockWidget">
++ <class>DWWidgets</class>
++ <widget class="QDockWidget" name="DWWidgets">
+   <property name="geometry">
+    <rect>
+     <x>0</x>

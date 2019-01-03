@@ -1,6 +1,7 @@
 #ifndef EXAMPLE_H
 #define EXAMPLE_H
 
+#include <memory>
 #include <QMainWindow>
 
 namespace Ui {
@@ -12,11 +13,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit MainWindow(QWidget* parent = nullptr);
+    virtual ~MainWindow() override;
 
 private:
-    Ui::MainWindow *ui;
+    std::unique_ptr<Ui::MainWindow> ui;
 };
 
 #endif // EXAMPLE_H

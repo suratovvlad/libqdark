@@ -1,22 +1,22 @@
-
+#include <memory>
 #include <QApplication>
 #include <QDarkThemePlugin.h>
 #include "example.h"
 
-using namespace std;
-
 int main(int argc, char *argv[])
 {
-	QApplication app(argc, argv);
-	app.setApplicationName("libqdarkExampleApp");
+    auto app = std::unique_ptr<QApplication>{ new QApplication{ argc, argv } };
 
-	QSharedPointer<QDarkThemePlugin> darker = QSharedPointer<QDarkThemePlugin>(new QDarkThemePlugin());
-	darker->changeLinksColor();
+    app->setOrganizationName("QDarkStyle (libqdark)");
+    app->setApplicationName("QDarkStyle Example (libqdark)");
 
-	MainWindow mainWindow;
-	mainWindow.show();
+    auto darker = std::unique_ptr<QDarkThemePlugin>{ new QDarkThemePlugin{} };
+    darker->changeLinksColor();
 
-	darker->initialize();
+    auto mainWindow = std::unique_ptr<MainWindow>{ new MainWindow{} };
+    mainWindow->show();
 
-    return app.exec();
+    darker->initialize();
+
+    return app->exec();
 }
