@@ -14,9 +14,10 @@ int main(int argc, char *argv[])
     darker->changeLinksColor();
 
     auto mainWindow = std::unique_ptr<MainWindow>{ new MainWindow{} };
-    mainWindow->show();
 
     darker->initialize();
+    mainWindow->show();
 
     return app->exec();
 }
+

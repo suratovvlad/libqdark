@@ -4,7 +4,7 @@
 
 using namespace libqdark;
 
-const QString SettingsManager::SETTING_DARK_THEME_ENABLED = "DarkThemeEnabled";
+const QString SettingsManager::SETTING_CURRENT_THEME = "CurrentTheme";
 const QString SettingsManager::SETTING_DEFAULT_STYLE = "DefaultStyle";
 const QString SettingsManager::SETTING_FIRST_START = "FirstAppStart";
 
@@ -14,20 +14,24 @@ SettingsManager::SettingsManager(QObject* parent)
     auto userPath = QDir::fromNativeSeparators(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
     userPath += QDir::separator();
     userPath += "qdarktheme.conf";
+//    userPath = QDir::toNativeSeparators(userPath);
     m_settings = std::make_unique<QSettings>(new QSettings{ userPath, QSettings::IniFormat });
 
     if (!fileExists(userPath)) {
-        updateValue(SETTING_DARK_THEME_ENABLED, false);
+        setCurrentTheme(CurrentTheme::Light);
         updateValue(SETTING_DEFAULT_STYLE, QString(""));
         updateValue(SETTING_FIRST_START, true);
+        m_settings->sync();
     } else {
-        getBoolValue(SETTING_DARK_THEME_ENABLED);
+        getIntValue(SETTING_CURRENT_THEME);
         getStringValue(SETTING_DEFAULT_STYLE);
         getBoolValue(SETTING_FIRST_START);
     }
 }
 
-SettingsManager::~SettingsManager() = default;
+SettingsManager::~SettingsManager() {
+    m_settings->sync();
+};
 
 QString SettingsManager::getStringValue(const QString& key) const
 {
@@ -39,9 +43,24 @@ bool SettingsManager::getBoolValue(const QString &key) const
     return m_settings->value(key).toBool();
 }
 
+int SettingsManager::getIntValue(const QString &key) const
+{
+   return m_settings->value(key).toInt();
+}
+
 void SettingsManager::updateValue(const QString& key, const QVariant& value) const
 {
     m_settings->setValue(key, value);
+}
+
+SettingsManager::CurrentTheme SettingsManager::getCurrentTheme() const
+{
+    return static_cast<CurrentTheme>(getIntValue(SETTING_CURRENT_THEME));
+}
+
+void SettingsManager::setCurrentTheme(const SettingsManager::CurrentTheme &currentTheme)
+{
+    updateValue(SETTING_CURRENT_THEME, static_cast<int>(currentTheme));
 }
 
 bool SettingsManager::fileExists(const QString& path)

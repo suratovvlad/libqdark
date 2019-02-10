@@ -23,14 +23,16 @@ SOURCES += \
     QDarkThemePlugin.cpp \
     QDarkThemePlugin_p.cpp \
     SettingsManager.cpp \
-    AboutDarkThemePluginDialog.cpp
+    AboutDarkThemePluginDialog.cpp \
+    SystemThemeHelper.cpp
 
 HEADERS += \
     libqdark_global.h \
     QDarkThemePlugin.h \
     QDarkThemePlugin_p.h \
     SettingsManager.h \
-    AboutDarkThemePluginDialog.h
+    AboutDarkThemePluginDialog.h \
+    SystemThemeHelper.h
 
 RESOURCES += QDarkStyleSheet/qdarkstyle/style.qrc
 
@@ -43,6 +45,14 @@ unix:!macx {
                      QDarkThemePlugin.h
     INSTALLS += target \
                 includes
+}
+
+win32 {
+    SOURCES += \
+        Windows10ThemeNotifier.cpp
+
+    HEADERS += \
+        Windows10ThemeNotifier.h
 }
 
 DISTFILES += \

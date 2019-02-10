@@ -11,6 +11,13 @@ class SettingsManager final: public QObject
     Q_OBJECT
 
 public:
+    enum class CurrentTheme
+    {
+        Light = 0,
+        Dark,
+        System
+    };
+
     explicit SettingsManager(QObject* parent = nullptr);
 
     virtual ~SettingsManager() override;
@@ -22,9 +29,13 @@ public:
 
     QString getStringValue(const QString& key) const;
     bool getBoolValue(const QString& key) const;
+    int getIntValue(const QString& key) const;
     void updateValue(const QString& key, const QVariant& value) const;
 
-    static const QString SETTING_DARK_THEME_ENABLED;
+    CurrentTheme getCurrentTheme() const;
+    void setCurrentTheme(const CurrentTheme& currentTheme);
+
+    static const QString SETTING_CURRENT_THEME;
     static const QString SETTING_DEFAULT_STYLE;
     static const QString SETTING_FIRST_START;
 
