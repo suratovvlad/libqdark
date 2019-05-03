@@ -48,6 +48,11 @@ unix:!macx {
 }
 
 win32 {
+    #Skip version tagging on windows
+    #https://stackoverflow.com/a/34470370
+    #https://stackoverflow.com/q/404774
+    CONFIG += skip_target_version_ext
+
     SOURCES += \
         Windows10ThemeNotifier.cpp
 
