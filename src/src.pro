@@ -58,6 +58,15 @@ win32 {
 
     HEADERS += \
         Windows10ThemeNotifier.h
+
+    isEmpty( PREFIX ):PREFIX = /usr
+    DEFINES += PREFIX=\\\"$${PREFIX}\\\"
+    target.path = $${PREFIX}/lib
+    includes.path = $${PREFIX}/include/libqdark
+    includes.files = libqdark_global.h \
+                     QDarkThemePlugin.h
+    INSTALLS += target \
+                includes
 }
 
 DISTFILES += \
