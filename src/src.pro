@@ -66,15 +66,16 @@ win32 {
     ## This is just because qmake ..
 
     isEmpty(PREFIX) {
-            PREFIX = /usr
+            # TODO: Think about better way
+            PREFIX = /mingw64
     }
 
 #    DEFINES += PREFIX=\\\"$${PREFIX}\\\"
 
-    target.path = $$PREFIX/lib
+    target.path = $${PREFIX}/lib
 
     ## We will install the headers in a API specific include path
-    includes.path = $$PREFIX/include/$${TARGET}
+    includes.path = $${PREFIX}/include/$${TARGET}
 
     ## Here we put only the publicly installed headers
     includes.files = libqdark_global.h \
@@ -99,7 +100,7 @@ win32 {
     # This is where our API specific headers are
     QMAKE_PKGCONFIG_INCDIR = $$includes.path
     QMAKE_PKGCONFIG_DESTDIR = pkgconfig
-    QMAKE_PKGCONFIG_PREFIX = $$PREFIX
+    QMAKE_PKGCONFIG_PREFIX = $${PREFIX}
 
     # Usually people take the semver version here
     QMAKE_PKGCONFIG_VERSION = $$PROJECT_VERSION
