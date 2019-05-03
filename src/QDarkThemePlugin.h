@@ -3,6 +3,8 @@
 #include <memory>
 #include "libqdark_global.h"
 
+class QMainWindow;
+
 namespace libqdark {
 
 /**
@@ -48,6 +50,16 @@ public:
      * the QMainWindow instantiation.
      */
     void initialize();
+
+    /**
+     * @brief initialize
+     * This method initialize base functionality of that plugin: an additional
+     * menu with the "Dark theme" action and the "About" action.
+     * It uses the instance of QMainWindow, so, it needs to be called AFTER
+     * the QMainWindow instantiation.
+     * @param mainWindow - current QMainWindow pointer
+     */
+    void initialize(QMainWindow* mainWindow);
 
 private:
     /**

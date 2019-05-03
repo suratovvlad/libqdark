@@ -22,3 +22,8 @@ void QDarkThemePlugin::initialize()
     Q_D(QDarkThemePlugin);
     d->initialize();
 }
+
+void QDarkThemePlugin::initialize(QMainWindow *mainWindow)
+{
+    d_ptr->initialize(mainWindow);
+}

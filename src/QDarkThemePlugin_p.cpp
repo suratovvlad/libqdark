@@ -63,10 +63,38 @@ void QDarkThemePlugin::QDarkThemePluginPrivate::initialize()
         qApp->processEvents();
     }
 
-    // Initialize additional menu with actions as child of QMainWindow
-    m_darkThemeMenu = QSharedPointer<QMenu>(new QMenu{ QObject::tr("Dark Theme Plugin"), m_mainWindow });
+    init();
+}
 
-//    m_darkThemeMenu->addSection(QObject::tr("Choose Theme"));
+void QDarkThemePlugin::QDarkThemePluginPrivate::initialize(QMainWindow *mainWindow)
+{
+    m_mainWindow = mainWindow;
+    init();
+}
+
+void QDarkThemePlugin::QDarkThemePluginPrivate::_q_SetLightTheme()
+{
+    // Change theme to default style
+    qApp->setStyleSheet(m_settingsManager->getStringValue(SettingsManager::SETTING_DEFAULT_STYLE));
+}
+
+void QDarkThemePlugin::QDarkThemePluginPrivate::_q_SetDarkTheme()
+{
+    // Change theme to dark
+    qApp->setStyleSheet(m_darkThemeStyleSheet);
+}
+
+void QDarkThemePlugin::QDarkThemePluginPrivate::_q_SetSystemTheme()
+{
+    m_systemThemeHelper->setEnabled(true);
+    // Update settings value
+    m_settingsManager->setCurrentTheme(SettingsManager::CurrentTheme::System);
+}
+
+void QDarkThemePlugin::QDarkThemePluginPrivate::init()
+{
+    // Initialize additional menu with actions as child of QMainWindow
+    m_darkThemeMenu = new QMenu{ QObject::tr("Dark Theme Plugin"), m_mainWindow };
 
     auto m_enableDarkThemeActionGroup = new QActionGroup{ m_mainWindow };
 
@@ -120,49 +148,24 @@ void QDarkThemePlugin::QDarkThemePluginPrivate::initialize()
     }
     m_darkThemeMenu->addSeparator();
 
-    // Initialize checkable action for changing theme
-//    m_enableDarkThemeAction = QSharedPointer<QAction>(new QAction{ /*QObject::tr("Choose Theme")*/ });
-//    m_enableDarkThemeAction->setCheckable(true);
-
-
-//    auto lightTheme = new QAction{ QObject::tr("Light") };
-//    auto darkTheme = new QAction{ QObject::tr("Dark") };
-//    auto useWindowsTheme = new QAction{ QObject::tr("Use Windows theme") };
-
-
-//    m_enableDarkThemeActionGroup->addAction(lightTheme);
-//    m_enableDarkThemeActionGroup->addAction(darkTheme);
-//    m_enableDarkThemeActionGroup->addAction(useWindowsTheme);
-//    darkTheme->setChecked(true);
-
-//    m_enableDarkThemeAction->setActionGroup(m_enableDarkThemeActionGroup);
-
-    // Connect this action to slot
-//    QObject::connect(m_enableDarkThemeAction.get(), &QAction::toggled, [this]{ _q_ToggleTheme(); });
-
-    // Add this action to menu
-    // According to https://doc.qt.io/qt-5/qwidget.html#addAction, the ownership of action is not
-    // transferred to this QWidget. So, we have to handle this pointer
-//    m_darkThemeMenu->addAction(m_enableDarkThemeAction.get());
-
     // Initialize action for about menu
-    m_aboutAction = QSharedPointer<QAction>(new QAction{ QObject::tr("About") });
+    m_aboutAction = new QAction{ QObject::tr("About") };
 
     // Add this action to menu
     // According to https://doc.qt.io/qt-5/qwidget.html#addAction, the ownership of action is not
     // transferred to this QWidget. So, we have to handle this pointer
-    m_darkThemeMenu->addAction(m_aboutAction.get());
+    m_darkThemeMenu->addAction(m_aboutAction);
 
     // Create about dialog as child of QMainWindow
-    m_aboutDialog = QSharedPointer<AboutDarkThemePluginDialog>(new AboutDarkThemePluginDialog{ m_mainWindow });
+    m_aboutDialog = new AboutDarkThemePluginDialog{ m_mainWindow };
     m_aboutDialog->setUpdatesEnabled(true);
 
     // Connect about action with the about dialog
-    QObject::connect(m_aboutAction.get(), &QAction::triggered, m_aboutDialog.get(), &QDialog::show);
+    QObject::connect(m_aboutAction, &QAction::triggered, m_aboutDialog, &QDialog::show);
 
     // Add new menu to QMenuBar of the
     // TODO: who is an ownership?
-    m_mainWindow->menuBar()->addMenu(m_darkThemeMenu.get());
+    m_mainWindow->menuBar()->addMenu(m_darkThemeMenu);
 
     // First initialization by saved settings
     const auto isFirstStart = m_settingsManager->getBoolValue(SettingsManager::SETTING_FIRST_START);
@@ -204,31 +207,6 @@ void QDarkThemePlugin::QDarkThemePluginPrivate::initialize()
 #endif
             break;
     }
-}
-
-//#include <QDebug>
-
-void QDarkThemePlugin::QDarkThemePluginPrivate::_q_SetLightTheme()
-{
-//    qDebug() << "_q_SetLightTheme";
-    // Change theme to default style
-    m_mainWindow->setStyleSheet(m_settingsManager->getStringValue(SettingsManager::SETTING_DEFAULT_STYLE));
-}
-
-void QDarkThemePlugin::QDarkThemePluginPrivate::_q_SetDarkTheme()
-{
-//    qDebug() << "_q_SetDarkTheme";
-
-    // Change theme to dark
-    m_mainWindow->setStyleSheet(m_darkThemeStyleSheet);
-}
-
-void QDarkThemePlugin::QDarkThemePluginPrivate::_q_SetSystemTheme()
-{
-//    qDebug() << "_q_SetWindowsTheme;";
-    m_systemThemeHelper->setEnabled(true);
-    // Update settings value
-    m_settingsManager->setCurrentTheme(SettingsManager::CurrentTheme::System);
 }
 
 

@@ -38,24 +38,27 @@ public:
 
     void changeLinksColor();
     void initialize();
+    void initialize(QMainWindow* mainWindow);
 
     void _q_SetLightTheme();
     void _q_SetDarkTheme();
     void _q_SetSystemTheme();
 
 private:
-    QSharedPointer<QMenu> m_darkThemeMenu;
+    void init();
+
+    QMenu* m_darkThemeMenu;
 
     QAction* m_lightThemeAction;
     QAction* m_darkThemeAction;
     QAction* m_systemThemeAction;
 
-    QSharedPointer<QAction> m_aboutAction;
+    QAction* m_aboutAction;
     QString m_darkThemeStyleSheet;
 
     QMainWindow* m_mainWindow;
     QSharedPointer<libqdark::SettingsManager> m_settingsManager;
-    QSharedPointer<libqdark::AboutDarkThemePluginDialog> m_aboutDialog;
+    libqdark::AboutDarkThemePluginDialog* m_aboutDialog;
 
     QSharedPointer<libqdark::SystemThemeHelper> m_systemThemeHelper;
 };

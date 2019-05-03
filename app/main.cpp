@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     auto mainWindow = std::unique_ptr<MainWindow>{ new MainWindow{} };
 
-    darker->initialize();
+    darker->initialize(mainWindow.get());
     mainWindow->show();
 
     return app->exec();
