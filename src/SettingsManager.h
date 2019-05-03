@@ -42,7 +42,7 @@ public:
 private:
     bool fileExists(const QString& path);
 
-    std::unique_ptr<QSettings> m_settings;
+    QSettings* m_settings;
 };
 
 } // namespace libqdark

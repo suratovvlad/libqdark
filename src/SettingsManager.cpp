@@ -11,17 +11,16 @@ const QString SettingsManager::SETTING_FIRST_START = "FirstAppStart";
 SettingsManager::SettingsManager(QObject* parent)
     : QObject(parent)
 {
-    auto userPath = QDir::fromNativeSeparators(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
+    auto userPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
     userPath += QDir::separator();
     userPath += "qdarktheme.conf";
-//    userPath = QDir::toNativeSeparators(userPath);
-    m_settings = std::make_unique<QSettings>(new QSettings{ userPath, QSettings::IniFormat });
+    userPath = QDir::toNativeSeparators(userPath);
+    m_settings = new QSettings{ userPath, QSettings::IniFormat };
 
     if (!fileExists(userPath)) {
         setCurrentTheme(CurrentTheme::Light);
         updateValue(SETTING_DEFAULT_STYLE, QString(""));
         updateValue(SETTING_FIRST_START, true);
-        m_settings->sync();
     } else {
         getIntValue(SETTING_CURRENT_THEME);
         getStringValue(SETTING_DEFAULT_STYLE);
@@ -31,6 +30,7 @@ SettingsManager::SettingsManager(QObject* parent)
 
 SettingsManager::~SettingsManager() {
     m_settings->sync();
+    m_settings->deleteLater();
 };
 
 QString SettingsManager::getStringValue(const QString& key) const
@@ -51,6 +51,7 @@ int SettingsManager::getIntValue(const QString &key) const
 void SettingsManager::updateValue(const QString& key, const QVariant& value) const
 {
     m_settings->setValue(key, value);
+    m_settings->sync();
 }
 
 SettingsManager::CurrentTheme SettingsManager::getCurrentTheme() const
