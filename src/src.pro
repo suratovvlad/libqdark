@@ -59,6 +59,8 @@ win32 {
     HEADERS += \
         Windows10ThemeNotifier.h
 
+    CONFIG += staticlib
+
     # Taken from https://github.com/pvanhoof/dir-examples/blob/master/qmake-example/src/libs/qmake-example/qmake-example.pro
     # See also https://stackoverflow.com/questions/6823862/qmake-creating-a-pc-file
     # See also https://stackoverflow.com/questions/6794710/qt-qmake-generating-pkgconfig-for-a-project
