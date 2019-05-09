@@ -34,7 +34,8 @@ HEADERS += \
     AboutDarkThemePluginDialog.h \
     SystemThemeHelper.h
 
-RESOURCES += QDarkStyleSheet/qdarkstyle/style.qrc
+RESOURCES += QDarkStyleSheet/qdarkstyle/style.qrc \
+    QDarkStyleSheet_2.1/qdarkstyle/style_2.1.qrc
 
 unix:!macx {
     isEmpty( PREFIX ):PREFIX = /usr

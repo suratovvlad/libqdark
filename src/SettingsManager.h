@@ -38,6 +38,7 @@ public:
     static const QString SETTING_CURRENT_THEME;
     static const QString SETTING_DEFAULT_STYLE;
     static const QString SETTING_FIRST_START;
+    static const QString SETTING_USE_OLD_THEME;
 
 private:
     bool fileExists(const QString& path);

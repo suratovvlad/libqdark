@@ -46,6 +46,7 @@ public:
 
 private:
     void init();
+    void switchToCurrentTheme();
 
     QMenu* m_darkThemeMenu;
 
@@ -55,6 +56,7 @@ private:
 
     QAction* m_aboutAction;
     QString m_darkThemeStyleSheet;
+    QString m_darkThemeStyleSheet_2_1;
 
     QMainWindow* m_mainWindow;
     QSharedPointer<libqdark::SettingsManager> m_settingsManager;

@@ -24,15 +24,19 @@ QDarkThemePlugin::QDarkThemePluginPrivate::QDarkThemePluginPrivate(QDarkThemePlu
     , m_settingsManager{ new SettingsManager{} }
     , m_systemThemeHelper{ new SystemThemeHelper{} }
 {
-    // Read stylesheet from resources
-    QFile file = {":qdarkstyle/style.qss"};
+    auto fileLoader = [](const QString& filePath, QString* classField){
+        // Read stylesheet from resources
+        QFile file = { filePath };
 
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream stream{ &file };
-        m_darkThemeStyleSheet.append(stream.readAll());
-        file.close();
-    }
+        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream stream{ &file };
+            classField->append(stream.readAll());
+            file.close();
+        }
+    };
 
+    fileLoader(":qdarkstyle/style.qss", &m_darkThemeStyleSheet);
+    fileLoader(":qdarkstyle_2_1/style_2.1.qss", &m_darkThemeStyleSheet_2_1);
 
     QObject::connect(m_systemThemeHelper.get(), &SystemThemeHelper::signalLightTheme, [this]{ _q_SetLightTheme(); });
     QObject::connect(m_systemThemeHelper.get(), &SystemThemeHelper::signalDarkTheme, [this]{ _q_SetDarkTheme(); });
@@ -148,6 +152,19 @@ void QDarkThemePlugin::QDarkThemePluginPrivate::init()
     }
     m_darkThemeMenu->addSeparator();
 
+    auto oldThemeCheckBox = m_darkThemeMenu->addAction(QObject::tr("Use old theme"));
+    oldThemeCheckBox->setCheckable(true);
+    oldThemeCheckBox->setChecked(false);
+    QObject::connect(oldThemeCheckBox, &QAction::triggered,
+        [this] {
+            std::swap(m_darkThemeStyleSheet, m_darkThemeStyleSheet_2_1);
+            switchToCurrentTheme();
+            // Update settings value
+            const auto useOldTheme = m_settingsManager->getBoolValue(SettingsManager::SETTING_USE_OLD_THEME);
+            m_settingsManager->updateValue(SettingsManager::SETTING_USE_OLD_THEME, !useOldTheme);
+        }
+    );
+
     // Initialize action for about menu
     m_aboutAction = new QAction{ QObject::tr("About") };
 
@@ -179,8 +196,22 @@ void QDarkThemePlugin::QDarkThemePluginPrivate::init()
 #else
         m_settingsManager->setCurrentTheme(SettingsManager::CurrentTheme::Dark);
 #endif
+        m_settingsManager->updateValue(SettingsManager::SETTING_USE_OLD_THEME, false);
     }
 
+    const auto useOldTheme = m_settingsManager->getBoolValue(SettingsManager::SETTING_USE_OLD_THEME);
+    oldThemeCheckBox->setChecked(useOldTheme);
+//    oldThemeCheckBox->trigger();
+
+    if (useOldTheme) {
+        std::swap(m_darkThemeStyleSheet, m_darkThemeStyleSheet_2_1);
+    }
+
+    switchToCurrentTheme();
+}
+
+void QDarkThemePlugin::QDarkThemePluginPrivate::switchToCurrentTheme()
+{
     const auto currentTheme = m_settingsManager->getCurrentTheme();
 
     const auto setterAction = [&m_darkThemeMenu = this->m_darkThemeMenu](QAction* action)

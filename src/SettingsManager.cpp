@@ -7,6 +7,7 @@ using namespace libqdark;
 const QString SettingsManager::SETTING_CURRENT_THEME = "CurrentTheme";
 const QString SettingsManager::SETTING_DEFAULT_STYLE = "DefaultStyle";
 const QString SettingsManager::SETTING_FIRST_START = "FirstAppStart";
+const QString SettingsManager::SETTING_USE_OLD_THEME = "UseOldTheme";
 
 SettingsManager::SettingsManager(QObject* parent)
     : QObject(parent)
@@ -21,10 +22,12 @@ SettingsManager::SettingsManager(QObject* parent)
         setCurrentTheme(CurrentTheme::Light);
         updateValue(SETTING_DEFAULT_STYLE, QString(""));
         updateValue(SETTING_FIRST_START, true);
+        updateValue(SETTING_USE_OLD_THEME, false);
     } else {
         getIntValue(SETTING_CURRENT_THEME);
         getStringValue(SETTING_DEFAULT_STYLE);
         getBoolValue(SETTING_FIRST_START);
+        getBoolValue(SETTING_USE_OLD_THEME);
     }
 }
 
