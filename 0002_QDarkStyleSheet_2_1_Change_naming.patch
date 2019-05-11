@@ -1,8 +1,8 @@
 diff --git a/qdarkstyle/style.qrc b/qdarkstyle/style_2.1.qrc
-similarity index 93%
+similarity index 95%
 rename from qdarkstyle/style.qrc
 rename to qdarkstyle/style_2.1.qrc
-index ac14bc5..14f379f 100644
+index ac14bc5..fc75405 100644
 --- a/qdarkstyle/style.qrc
 +++ b/qdarkstyle/style_2.1.qrc
 @@ -1,5 +1,5 @@
@@ -17,16 +17,15 @@ index ac14bc5..14f379f 100644
      <file>rc/radio_unchecked.png</file>
    </qresource>
 -  <qresource prefix="qdarkstyle">
--      <file>style.qss</file>
 +  <qresource prefix="qdarkstyle_2_1">
-+      <file>style_2.1.qss</file>
+       <file>style.qss</file>
    </qresource>
  </RCC>
 diff --git a/qdarkstyle/style.qss b/qdarkstyle/style_2.1.qss
 similarity index 85%
 rename from qdarkstyle/style.qss
 rename to qdarkstyle/style_2.1.qss
-index 8f61972..b480a80 100644
+index 8f61972..1c2dd95 100644
 --- a/qdarkstyle/style.qss
 +++ b/qdarkstyle/style_2.1.qss
 @@ -91,7 +91,7 @@ QCheckBox::indicator:unchecked:hover,
@@ -162,7 +161,7 @@ index 8f61972..b480a80 100644
  
  QMenu::indicator:non-exclusive:unchecked:selected {
 -    image: url(:/qss_icons/rc/checkbox_unchecked_disabled.png);
-+    image: url(:/qss_s/rc/checkbox_unchecked_disabled.png);
++    image: url(:/qss_icons_2_1/rc/checkbox_unchecked_disabled.png);
  }
  
  QMenu::indicator:non-exclusive:checked {
