@@ -46,6 +46,11 @@ void QDarkThemePlugin::QDarkThemePluginPrivate::changeLinksColor()
 {
     auto palette = qApp->palette();
     palette.setColor(QPalette::Link, QColor("#00bfff"));
+
+    // This fixes qbittorrent dark text on dark background
+    // TODO: think about more elegant way
+    palette.setColor(QPalette::Active, QPalette::Base, QColor{ 100, 100, 100 });
+
     qApp->setPalette(palette);
 }
 
